@@ -1,11 +1,6 @@
-
-
-
-
-
-
 export class UpdateCorporateDto {
   name?: string;
-country_code?: string;
-disabledAt?: Date;
+  code_souscripteur?: string;
+  country_code?: string;
+  disabledAt?: Date;
 }

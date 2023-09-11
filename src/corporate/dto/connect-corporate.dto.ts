@@ -1,5 +1,4 @@
-
-  export class ConnectCorporateDto {
-    id: number;
-  }
-  
+export class ConnectCorporateDto {
+  id: number;
+  uuid?: string;
+}

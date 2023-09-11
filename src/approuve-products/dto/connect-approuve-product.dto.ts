@@ -1,4 +1,4 @@
-export class ConnectApprouveProductsDto {
+export class ConnectApprouveProductDto {
   id: number;
 }
   

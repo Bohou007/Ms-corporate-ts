@@ -1,21 +1,63 @@
+import { Users } from '../../users/entities/users.entity';
+import { ApprouveProducts } from '../../approuve-products/entities/approuve-product.entity';
+import { DataSituation } from '../../data-situations/entities/data-situation.entity';
+import { Taux } from '../../taux/entities/taux.entity';
 
-import {Users} from '../../users/entities/users.entity'
-import {ApprouveProducts} from '../../approuveProducts/entities/approuveProducts.entity'
-import {DataSituations} from '../../dataSituations/entities/dataSituations.entity'
-import {Taux} from '../../taux/entities/taux.entity'
-
+import {
+  IsInt,
+  IsDefined,
+  IsString,
+  IsBoolean,
+  IsDate,
+  IsOptional,
+} from 'class-validator';
 
 export class Corporate {
-  id: number ;
-uuid: string ;
-name: string ;
-country_code: string ;
-is_enable: boolean ;
-disabledAt: Date  | null;
-createdAt: Date ;
-updatedAt: Date ;
-Users?: Users[] ;
-ApprouveProducts?: ApprouveProducts[] ;
-DataSituations?: DataSituations[] ;
-Taux?: Taux[] ;
+  @IsDefined()
+  @IsInt()
+  id!: number;
+
+  @IsDefined()
+  @IsString()
+  uuid!: string;
+
+  @IsDefined()
+  @IsString()
+  name!: string;
+
+  @IsDefined()
+  @IsString()
+  code_souscripteur: string;
+
+  @IsDefined()
+  @IsString()
+  country_code!: string;
+
+  @IsDefined()
+  @IsBoolean()
+  is_enable!: boolean;
+
+  @IsOptional()
+  @IsDate()
+  disabledAt?: Date;
+
+  @IsDefined()
+  @IsDate()
+  createdAt!: Date;
+
+  @IsDefined()
+  @IsDate()
+  updatedAt!: Date;
+
+  @IsDefined()
+  Users!: Users[];
+
+  @IsDefined()
+  ApprouveProducts!: ApprouveProducts[];
+
+  @IsDefined()
+  DataSituations!: DataSituation[];
+
+  @IsDefined()
+  Taux!: Taux[];
 }
