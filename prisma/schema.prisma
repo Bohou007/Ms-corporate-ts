@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestjsDto {
+  provider                        = "prisma-generator-nestjs-dto"
+  output                          = "../src/generated/nestjs-dto"
+  outputToNestJsResourceStructure = "true"
+  exportRelationModifierClasses   = "true"
+  reExport                        = "false"
+  createDtoPrefix                 = "Create"
+  updateDtoPrefix                 = "Update"
+  dtoSuffix                       = "Dto"
+  entityPrefix                    = ""
+  entitySuffix                    = ""
+  fileNamingStyle                 = "camel"
+}
+
+generator class_validator {
+  provider = "prisma-class-validator-generator"
+  output   = "../src/generated/validation"
+}
+
+generator docs {
+  provider              = "node node_modules/prisma-docs-generator"
+  output                = "../../docs"
+  includeRelationFields = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Corporate {
+  id                Int                @id @default(autoincrement())
+  uuid              String             @unique @default(uuid())
+  name              String             @db.VarChar(250)
+  code_souscripteur String
+  country_code      String             @db.VarChar(10)
+  is_enable         Boolean            @default(true)
+  disabledAt        DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  Users             Users[]
+  ApprouveProducts  ApprouveProducts[]
+  DataSituations    DataSituations[]
+  Taux              Taux[]
+}
+
+model ApprouveProducts {
+  id                Int              @id @default(autoincrement())
+  uuid              String           @unique @default(uuid())
+  product_code_core String
+  product_name      String
+  product_code      String?
+  is_enable         Boolean          @default(true)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  Corporate         Corporate?       @relation(fields: [corporateId], references: [id])
+  corporateId       Int?
+  Taux              Taux[]
+  DataSituations    DataSituations[]
+}
+
+model Users {
+  id                  Int       @id @default(autoincrement())
+  uuid                String    @unique @default(uuid())
+  first_name          String
+  last_name           String
+  email               String    @unique
+  password            String
+  role_code           String
+  status              Boolean   @default(true)
+  token               String?   @unique
+  is_password_updated Boolean?
+  is_enable           Boolean   @default(true)
+  is_already_signup   Boolean?
+  login_attempts      Int?
+  login_attempt_time  String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  Corporate           Corporate @relation(fields: [corporateId], references: [id])
+  corporateId         Int
+}
+
+model DataSituations {
+  id                 Int               @id @default(autoincrement())
+  exercice           String
+  police             String
+  typeCompte         String
+  soldePrec          String
+  pbPrec             String
+  cotiExo            String
+  rachExo            String
+  soldeExo           String
+  pbExo              String
+  intg               String
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  Corporate          Corporate?        @relation(fields: [corporateId], references: [id])
+  corporateId        Int?
+  Taux               Taux?             @relation(fields: [tauxId], references: [id])
+  tauxId             Int?
+  ApprouveProducts   ApprouveProducts? @relation(fields: [approuveProductsId], references: [id])
+  approuveProductsId Int?
+}
+
+model Taux {
+  id                 Int               @id @default(autoincrement())
+  exercice           String
+  produit            String
+  tauxUA             String
+  tauxAXA            String
+  tauxRevalo         String
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  Corporate          Corporate?        @relation(fields: [corporateId], references: [id])
+  corporateId        Int?
+  ApprouveProducts   ApprouveProducts? @relation(fields: [approuveProductsId], references: [id])
+  approuveProductsId Int?
+  DataSituations     DataSituations[]
+}
