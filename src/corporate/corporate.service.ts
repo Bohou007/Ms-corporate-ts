@@ -22,6 +22,7 @@ export class CorporateService {
       name: createCorporateDto.name,
       country_code: createCorporateDto.country_code,
       code_souscripteur: createCorporateDto.code_souscripteur,
+      souscripteur_name: createCorporateDto.souscripteur_name,
     };
     const corporate = await prisma.corporate.create({
       data: dataCorporate,

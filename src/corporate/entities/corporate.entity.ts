@@ -31,6 +31,10 @@ export class Corporate {
 
   @IsDefined()
   @IsString()
+  souscripteur_name: string;
+
+  @IsDefined()
+  @IsString()
   country_code!: string;
 
   @IsDefined()

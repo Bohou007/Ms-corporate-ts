@@ -15,6 +15,7 @@ model Corporate {
   uuid              String             @unique @default(uuid())
   name              String             @db.VarChar(250)
   code_souscripteur String
+  souscripteur_name String
   country_code      String             @db.VarChar(10)
   is_enable         Boolean            @default(true)
   disabledAt        DateTime?

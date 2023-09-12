@@ -16,6 +16,11 @@ export class CreateCorporateDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
+  souscripteur_name: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
   country_code: string;
 
   @ApiProperty()
