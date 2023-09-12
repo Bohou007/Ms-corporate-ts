@@ -5,31 +5,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator nestjsDto {
-  provider                        = "prisma-generator-nestjs-dto"
-  output                          = "../src/generated/nestjs-dto"
-  outputToNestJsResourceStructure = "true"
-  exportRelationModifierClasses   = "true"
-  reExport                        = "false"
-  createDtoPrefix                 = "Create"
-  updateDtoPrefix                 = "Update"
-  dtoSuffix                       = "Dto"
-  entityPrefix                    = ""
-  entitySuffix                    = ""
-  fileNamingStyle                 = "camel"
-}
-
-generator class_validator {
-  provider = "prisma-class-validator-generator"
-  output   = "../src/generated/validation"
-}
-
-generator docs {
-  provider              = "node node_modules/prisma-docs-generator"
-  output                = "../../docs"
-  includeRelationFields = true
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
