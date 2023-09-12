@@ -11,7 +11,7 @@ export class AuthenticateTokenMiddleware implements NestMiddleware {
     const allowedUrls = ['/api/users/password-forgotten', '/api/users/login'];
     const allowedUrlsContent = ['/api/users/reset-password/'];
     if (
-      ip === '172.16.9.5' ||
+      ip === '10.12.13.19' ||
       ip === '127.0.0.1' ||
       allowedUrlsContent.some((url) => req.originalUrl.startsWith(url)) ||
       allowedUrls.includes(req.originalUrl)

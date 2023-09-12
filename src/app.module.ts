@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common";
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CorporateModule } from './corporate/corporate.module';
@@ -27,9 +27,9 @@ import { VieModule } from './insurance-core/vie/vie.module';
   providers: [AppService, ServicesApiExternes],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthenticateTokenMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
-  }
+  //configure(consumer: MiddlewareConsumer) {
+  // consumer
+  //  .apply(AuthenticateTokenMiddleware)
+  // .forRoutes({ path: '*', method: RequestMethod.ALL });
+  //}
 }
