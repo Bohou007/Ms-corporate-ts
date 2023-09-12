@@ -1,50 +1,53 @@
 import { Injectable } from '@nestjs/common';
+import axios from 'axios';
 @Injectable()
 export class ServicesApiExternes {
   async get(url: string, options?: any) {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', ...options?.headers },
+    const response = await axios.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options?.headers || {}),
+      },
     });
-    return await response.json();
+    return await response.data;
   }
 
   async post(url: string, data: any, options?: any) {
     console.log(url, data);
-    const response = await fetch(url, {
-      method: 'post',
-      body: JSON.stringify(data),
+    const response = await axios.post(url, data, {
       headers: {
-        ...options?.headers,
         'Content-Type': 'application/json; charset=utf-8',
+        ...(options?.headers || {}),
       },
     });
-    return await response.json();
+    return await response.data;
   }
 
   async put(url: string, data: any, options?: any) {
-    const response = await fetch(url, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json', ...options?.headers },
+    const response = await axios.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options?.headers || {}),
+      },
     });
-    return response.json();
+    return response.data;
   }
 
   async delete(url: string, options?: any) {
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: { ...options?.headers },
+    const response = await axios.delete(url, {
+      headers: { ...(options?.headers || {}) },
     });
-    return response.json();
+    return response.data;
   }
 
   async token(url: string, data: any, options?: any) {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json', ...options?.headers },
-    })
+    const response = await axios
+      .post(url, data, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(options?.headers || {}),
+        },
+      })
       .then((response: any) => {
         console.log(response);
         return true;

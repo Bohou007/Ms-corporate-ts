@@ -27,7 +27,7 @@ export class AuthService {
     );
     await this.verifyValidAuth(validPassword, user);
     const fmt_data = { email: user.email, profil: 'corporate' };
-    const responseToken = await this.serviceApi.post(
+    const responseToken: any = await this.serviceApi.post(
       config.authenticate,
       fmt_data,
     );
