@@ -26,7 +26,7 @@ export class AuthService {
       user.password,
     );
     await this.verifyValidAuth(validPassword, user);
-    const fmt_data = { email: user.email, profil: 'partner' };
+    const fmt_data = { email: user.email, profil: 'corporate' };
     const responseToken = await this.serviceApi.post(
       config.authenticate,
       fmt_data,
@@ -34,7 +34,7 @@ export class AuthService {
     const auth = {
       headers: {
         Authorization: `Bearer ${responseToken.token}`,
-        profil: 'partner',
+        profil: 'corporate',
       },
     };
     const url = config.rolePermission + user.role_code;

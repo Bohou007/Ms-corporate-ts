@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { CreateTauxDto } from "./dto/create-taux.dto";
-import { UpdateTauxDto } from "./dto/update-taux.dto";
-import * as fs from "fs";
-import * as papaparse from "papaparse";
-import { ApprouveProductsService } from "../approuve-products/approuve-products.service";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CreateTauxDto } from './dto/create-taux.dto';
+import { UpdateTauxDto } from './dto/update-taux.dto';
+import * as fs from 'fs';
+import * as papaparse from 'papaparse';
+import { ApprouveProductsService } from '../approuve-products/approuve-products.service';
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 @Injectable()
@@ -74,6 +74,7 @@ export class TauxService {
     const result = [];
     const csvData = fs.readFileSync(file.path, 'utf8');
     const parsedData = papaparse.parse(csvData, { header: true });
+    console.log(parsedData.data);
     for (const row of parsedData.data) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

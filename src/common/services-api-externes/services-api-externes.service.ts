@@ -5,19 +5,21 @@ export class ServicesApiExternes {
     const response = await fetch(url, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', ...options?.headers },
-      ...options,
     });
     return await response.json();
   }
 
   async post(url: string, data: any, options?: any) {
+    console.log(url, data);
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'post',
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json', ...options?.headers },
-      ...options,
+      headers: {
+        ...options?.headers,
+        'Content-Type': 'application/json; charset=utf-8',
+      },
     });
-    return response.json();
+    return await response.json();
   }
 
   async put(url: string, data: any, options?: any) {
@@ -25,7 +27,6 @@ export class ServicesApiExternes {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json', ...options?.headers },
-      ...options,
     });
     return response.json();
   }
@@ -34,7 +35,6 @@ export class ServicesApiExternes {
     const response = await fetch(url, {
       method: 'DELETE',
       headers: { ...options?.headers },
-      ...options,
     });
     return response.json();
   }
@@ -44,7 +44,6 @@ export class ServicesApiExternes {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json', ...options?.headers },
-      ...options,
     })
       .then((response: any) => {
         console.log(response);

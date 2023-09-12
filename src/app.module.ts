@@ -10,6 +10,7 @@ import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthenticateTokenMiddleware } from './middlewares/authenticate-token/authenticate-token.middleware';
 import { ServicesApiExternes } from './common/services-api-externes/services-api-externes.service';
+import { VieModule } from './insurance-core/vie/vie.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ServicesApiExternes } from './common/services-api-externes/services-api
     DataSituationsModule,
     CommonModule,
     AuthModule,
+    VieModule,
   ],
   controllers: [AppController],
   providers: [AppService, ServicesApiExternes],

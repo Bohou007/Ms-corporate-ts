@@ -93,6 +93,12 @@ export class HelpersService {
     };
   }
 
+  getCountryURL(country_code: string, host: string, action: string) {
+    return country_code.toUpperCase() == 'CIV'
+      ? host
+      : `${host}/${country_code.toLowerCase()}-${action.toLowerCase()}`;
+  }
+
   async verifyPasswordPolicies(password: string) {
     const errors = [];
     const ruleOne = this.isLengthCorrect(password);

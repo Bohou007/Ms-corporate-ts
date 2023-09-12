@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import * as multer from 'multer';
+import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,9 +20,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   const multerConfig = multer({ dest: './uploads/' }).single('file');
   app.use(multerConfig);
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  app.use(express.json());
   await app.listen(9012);
 }
 
