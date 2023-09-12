@@ -9,6 +9,7 @@ import { DataSituationsModule } from './data-situations/data-situations.module';
 import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthenticateTokenMiddleware } from './middlewares/authenticate-token/authenticate-token.middleware';
+import { JsonMiddlewareMiddleware } from './middlewares/json-middleware/json-middleware.middleware';
 import { ServicesApiExternes } from './common/services-api-externes/services-api-externes.service';
 import { VieModule } from './insurance-core/vie/vie.module';
 
@@ -32,4 +33,9 @@ export class AppModule {
   //  .apply(AuthenticateTokenMiddleware)
   // .forRoutes({ path: '*', method: RequestMethod.ALL });
   //}
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JsonMiddlewareMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
 }
