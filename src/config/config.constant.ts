@@ -15,4 +15,5 @@ export const config = {
   policeReglementList: '/api/v1/life/corporate/reglements',
   policePrevisionsMathsDetail: '/api/v1/life/corporate/previsionsMaths',
   adherentDetail: '/api/v1/life/corporate/details/personne',
+  productAdherent: '/api/v1/life/corporate/nbreAdherents',
 };

@@ -33,6 +33,10 @@ export class VieController {
     return this.vieService.findInsurancePolicePrevision(prevision);
   }
 
+  @Post('nombre/adherent-police')
+  findProductAdherent(@Body() product: Product) {
+    return this.vieService.findInsuranceProductAdherent(product);
+  }
   @Post('details/adherent-police')
   findPolicieAdherent(@Body() adherent: Adherent) {
     return this.vieService.findInsurancePoliceAdherent(adherent);

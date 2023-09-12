@@ -80,6 +80,18 @@ export class VieService {
     return res;
   }
 
+  async findInsuranceProductAdherent(product: Product) {
+    const url = this.getURI(product.country_code);
+    const options = this.getOptionsConfig();
+    const res = await this.serviceApi.post(
+      url + config.productAdherent,
+      product,
+      options,
+    );
+    console.log(res);
+    return res;
+  }
+
   // Helpers function
   getURI(country_code: string) {
     return this.helpersService.getCountryURL(
