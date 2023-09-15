@@ -12,6 +12,8 @@ import { AuthenticateTokenMiddleware } from './middlewares/authenticate-token/au
 import { JsonMiddlewareMiddleware } from './middlewares/json-middleware/json-middleware.middleware';
 import { ServicesApiExternes } from './common/services-api-externes/services-api-externes.service';
 import { VieModule } from './insurance-core/vie/vie.module';
+import { ResponseLoggerMiddleware } from './middlewares/response-logger/response-logger.middleware';
+import { LogModule } from './log/log.module';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { VieModule } from './insurance-core/vie/vie.module';
     CommonModule,
     AuthModule,
     VieModule,
+    LogModule,
   ],
   controllers: [AppController],
   providers: [AppService, ServicesApiExternes],
@@ -35,7 +38,7 @@ export class AppModule {
   //}
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(JsonMiddlewareMiddleware)
+      .apply(JsonMiddlewareMiddleware, ResponseLoggerMiddleware)
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logs</title>
+  <style>
+    /* Ajoutez du CSS pour la mise en forme ici */
+  </style>
+</head>
+<body>
+<h1>Logs</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Date de la requête</th>
+    <th>Méthode HTTP</th>
+    <th>URL</th>
+    <th>Statut</th>
+    <th>Temps de la requête (ms)</th>
+    <th>Corps de la requête</th>
+    <th>Corps de la réponse</th>
+    <th>Adresse IP</th>
+    <th>User-Agent</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#each logs}}
+    <tr>
+      <td>{{this.requestDate}}</td>
+      <td>{{this.method}}</td>
+      <td>{{this.url}}</td>
+      <td>{{this.status}}</td>
+      <td>{{this.requestTime}}</td>
+      <td>{{this.requestBody}}</td>
+      <td>{{this.responseBody}}</td>
+      <td>{{this.ip}}</td>
+      <td>{{this.userAgent}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+</body>
+</html>
