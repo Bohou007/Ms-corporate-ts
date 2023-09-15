@@ -1,80 +1,524 @@
-openapi: 3.1.0
-info:
-  version: 1.0.0
-  title: Example.com
-  termsOfService: https://example.com/terms/
-  contact:
-    email: contact@example.com
-    url: http://example.com/contact
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  x-logo:
-    url: https://redocly.github.io/openapi-template/logo.png
-  description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
-
-    # Introduction
-
-    This API definition is intended to to be a good starting point for
-    describing your API in [OpenAPI/Swagger
-    format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
-
-    It also demonstrates features of the
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-    and the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-    the standard OpenAPI syntax, we use a few 
-    [vendor extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
-
-    # OpenAPI Specification
-
-    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
-    allows both humans and computers to discover and understand the capabilities
-    of the service without access to source
-    code, documentation, or through network traffic inspection. When properly
-    defined via OpenAPI, a consumer can 
-    understand and interact with the remote service with a minimal amount of
-    implementation logic. Similar to what
-    interfaces have done for lower-level programming, OpenAPI removes the
-    guesswork in calling the service.
-tags:
-  - name: Echo
-    description: Example echo operations.
-  - name: User
-    description: Operations about users.
-  - name: Tag
-    description: This is a tag description.
-servers:
-  - url: https://{tenant}/api/v1
-    variables:
-      tenant:
-        default: www
-        description: Your tenant id
-  - url: https://example.com/api/v1
+openapi: 3.0.0
 paths:
-  /users/{username}:
-    $ref: paths/users_{username}.yaml
-  /echo:
-    $ref: paths/echo.yaml
-  /pathItem:
-    $ref: paths/pathItem.yaml
-  /pathItemWithExamples:
-    $ref: paths/pathItemWithExamples.yaml
+  "/":
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  "/swagger-json":
+    get:
+      operationId: AppController_getSwaggerJson
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  "/corporate":
+    post:
+      operationId: CorporateController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateCorporateDto"
+      responses:
+        '201':
+          description: ''
+      tags:
+      - corporate
+    get:
+      operationId: CorporateController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+      - corporate
+  "/corporate/{id}":
+    get:
+      operationId: CorporateController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+      - corporate
+    patch:
+      operationId: CorporateController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateCorporateDto"
+      responses:
+        '200':
+          description: ''
+      tags:
+      - corporate
+    delete:
+      operationId: CorporateController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+      - corporate
+  "/users":
+    post:
+      operationId: UsersController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateUsersDto"
+      responses:
+        '201':
+          description: ''
+    get:
+      operationId: UsersController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  "/users/{id}":
+    get:
+      operationId: UsersController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+    put:
+      operationId: UsersController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateUsersDto"
+      responses:
+        '200':
+          description: ''
+    delete:
+      operationId: UsersController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/approuve-products":
+    post:
+      operationId: ApprouveProductsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateApprouveProductDto"
+      responses:
+        '201':
+          description: ''
+    get:
+      operationId: ApprouveProductsController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  "/approuve-products/{id}":
+    get:
+      operationId: ApprouveProductsController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+    patch:
+      operationId: ApprouveProductsController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateApprouveProductDto"
+      responses:
+        '200':
+          description: ''
+    delete:
+      operationId: ApprouveProductsController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/taux":
+    post:
+      operationId: TauxController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateTauxDto"
+      responses:
+        '201':
+          description: ''
+    get:
+      operationId: TauxController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  "/taux/upload":
+    post:
+      operationId: TauxController_uploadFile
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/taux/{id}":
+    get:
+      operationId: TauxController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+    patch:
+      operationId: TauxController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateTauxDto"
+      responses:
+        '200':
+          description: ''
+    delete:
+      operationId: TauxController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/data-situations":
+    post:
+      operationId: DataSituationsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateDataSituationDto"
+      responses:
+        '201':
+          description: ''
+    get:
+      operationId: DataSituationsController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  "/data-situations/upload":
+    post:
+      operationId: DataSituationsController_uploadFile
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/data-situations/corporate/{corporateId}":
+    get:
+      operationId: DataSituationsController_findAllSituationsByCorporate
+      parameters:
+      - name: corporateId
+        required: true
+        in: path
+        schema:
+          type: number
+      responses:
+        '200':
+          description: ''
+  "/data-situations/{id}":
+    get:
+      operationId: DataSituationsController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+    patch:
+      operationId: DataSituationsController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateDataSituationDto"
+      responses:
+        '200':
+          description: ''
+    delete:
+      operationId: DataSituationsController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/auth/login":
+    post:
+      operationId: AuthController_login
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/auth/reset-password/{token}":
+    put:
+      operationId: AuthController_resetPassword
+      parameters:
+      - name: token
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/auth/update-password-first-login/{uuid}":
+    put:
+      operationId: AuthController_updatePasswordFirstLogin
+      parameters:
+      - name: uuid
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/insurance-core/vie/corporate/{country_code}":
+    get:
+      operationId: VieController_findAllCorporate
+      parameters:
+      - name: country_code
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  "/insurance-core/vie/product":
+    post:
+      operationId: VieController_findAllProduct
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/insurance-core/vie/polices":
+    post:
+      operationId: VieController_findAllProductPolicies
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/insurance-core/vie/reglements":
+    post:
+      operationId: VieController_findAllPoliciesReglement
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/insurance-core/vie/previsions-mathematics":
+    post:
+      operationId: VieController_findAllPoliciesPrevisions
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/insurance-core/vie/nombre/adherent-police":
+    post:
+      operationId: VieController_findProductAdherent
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/insurance-core/vie/details/adherent-police":
+    post:
+      operationId: VieController_findPolicieAdherent
+      parameters: []
+      responses:
+        '201':
+          description: ''
+  "/logs":
+    get:
+      operationId: LogController_getLogs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+info:
+  title: Your API
+  description: API description
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
 components:
-  securitySchemes:
-    main_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://example.com/api/oauth/dialog
-          scopes:
-            read:users: read users info
-            write:users: modify or remove users
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
+  schemas:
+    CreateCorporateDto:
+      type: object
+      properties:
+        name:
+          type: string
+        code_souscripteur:
+          type: string
+        souscripteur_name:
+          type: string
+        country_code:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        role_code:
+          type: string
+        product:
+          type: array
+          items:
+            type: string
+      required:
+      - name
+      - code_souscripteur
+      - souscripteur_name
+      - country_code
+      - first_name
+      - last_name
+      - email
+      - role_code
+      - product
+    UpdateCorporateDto:
+      type: object
+      properties: {}
+    CreateUsersDto:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        role_code:
+          type: string
+        corporateId:
+          type: number
+      required:
+      - first_name
+      - last_name
+      - email
+      - role_code
+      - corporateId
+    UpdateUsersDto:
+      type: object
+      properties: {}
+    CreateApprouveProductDto:
+      type: object
+      properties: {}
+    UpdateApprouveProductDto:
+      type: object
+      properties: {}
+    CreateTauxDto:
+      type: object
+      properties: {}
+    UpdateTauxDto:
+      type: object
+      properties: {}
+    CreateDataSituationDto:
+      type: object
+      properties: {}
+    UpdateDataSituationDto:
+      type: object
+      properties: {}
